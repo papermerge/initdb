@@ -20,9 +20,9 @@ Optionally it can:
 
 InitDB reads its configuration from following sources:
 
-    * command line arguments
-    * configuration file
-    * environment variables
+* command line arguments
+* configuration file
+* environment variables
 
 If no command line arguments are supplied, initdb will search for its settings
 in configuration file. If neither command line arguments nor configuration file was provided
