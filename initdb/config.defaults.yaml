@@ -1,0 +1,7 @@
+initial_database_user: postgres
+initial_database_password:
+database_host: postgres
+database_name:
+database_password:
+database_port: 5432
+database_user:
