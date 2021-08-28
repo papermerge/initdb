@@ -14,6 +14,8 @@ Optionally it can:
 
     import initdb as init
 
+    init.setup()
+
     if init.db_is_ready(): # blocks script execution until database is ready
         init.create_user()
         init.create_db()
