@@ -39,6 +39,7 @@ def db_is_ready(conf):
         try:
             conn = connect(
                 user=conf.initial_user,
+                password=conf.initial_password,
                 host=conf.host,
                 port=conf.port
             )

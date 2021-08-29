@@ -2,7 +2,7 @@ import setuptools
 
 setuptools.setup(
     name="initdb",
-    version="0.2.0",
+    version="0.3.0",
     author='Eugen Ciur',
     author_email='eugen@papermerge.com',
     url='https://github.com/papermerge/initdb',
