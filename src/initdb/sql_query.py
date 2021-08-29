@@ -1,4 +1,8 @@
 from psycopg2 import sql
+from psycopg2.errors import (
+    DuplicateObject,
+    DuplicateDatabase
+)
 
 
 class SqlQuery:
@@ -14,10 +18,11 @@ class SqlQuery:
             password=sql.Identifier(self.config.password)
         )
 
-        cursor = self.connection.cursor()
-        cursor.execute(query)
-        cursor.close()
-        self.connection.commit()
+        with self.connection.cursor() as cursor:
+            try:
+                cursor.execute(query)
+            except DuplicateObject:
+                print(f"User {self.config.user} already exists")
 
     def create_db(self):
         query = sql.SQL(
@@ -26,11 +31,14 @@ class SqlQuery:
             user=sql.Identifier(self.config.user),
             database=sql.Identifier(self.config.database)
         )
-        self.connection.autocommit = True
-        with self.connection.cursor() as cursor:
-            cursor.execute(query)
 
-        self._grant_all_priv()
+        self.connection.autocommit = True  # required by CREATE DATABASE
+        with self.connection.cursor() as cursor:
+            try:
+                cursor.execute(query)
+                self._grant_all_priv()
+            except DuplicateDatabase:
+                print(f"Database {self.config.database} already exists")
 
     def _grant_all_priv(self):
         query = sql.SQL(

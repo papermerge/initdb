@@ -12,15 +12,32 @@ Optionally it can:
 
 ## Usage
 
+Use it from command line:
+
+    $ python3 -m initdb
+
+In order to print its config:
+
+    $ python3 -m initdb print
+
+Use it from other scripts:
+
     import initdb as init
 
     if init.db_is_ready(): # blocks script execution until database is ready
         init.create_user()
         init.create_db()
 
-InitDB reads its configuration from environment variables.
+`db_is_ready` function will try to connect to database and using
+`INITIAL_DATABASE_USER`, `DATABASE_HOST`, and `DATABASE_PORT`. If there is an
+error during the connection e.g. database is not availble, it will block
+(infinit loop with one second delay between cycles) the script until connection
+succeeds. When connection successed it will create a user, a database owned by
+that user and will exit.
 
 ## Environment Variables
+
+InitDB reads its configuration from following environment variables.
 
 * INITIAL_DATABASE_USER - default value is `postgres`
 * INITIAL_DATABASE_PASSWORD - default value is an empty string
