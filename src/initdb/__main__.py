@@ -1,10 +1,17 @@
 import sys
 
 from .config import config
-print("this is __main__.py")
 
+from .utils import (
+    db_is_ready,
+    create_user,
+    create_db
+)
 
-if len(sys.argv) > 1:
-    print(sys.argv[1])
+if len(sys.argv) == 2 and sys.argv[1] == "print":
+    config.print()
+    sys.exit(0)
 
-print(config)
+if db_is_ready():
+    create_user()
+    create_db()
