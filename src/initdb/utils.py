@@ -1,7 +1,10 @@
+import logging
 import time
 import psycopg2
 
 from .sql_query import SqlQuery
+
+logger = logging.getLogger(__name__)
 
 
 def connect(
@@ -20,7 +23,7 @@ def connect(
             port=port
         )
     except Exception as e:
-        print(e)
+        logger.error(e)
         raise
 
     return conn
@@ -44,11 +47,11 @@ def db_is_ready(conf):
                 port=conf.port
             )
             conn.close()
-            print("DB is READY!")
+            logger.info("DB is READY!")
             break
         except psycopg2.Error as e:
-            print("DB not ready yet")
-            print(e)
+            logger.info("DB not ready yet")
+            logger.info(e)
             time.sleep(1)
 
     return True

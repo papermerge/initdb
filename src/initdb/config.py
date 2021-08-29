@@ -1,8 +1,11 @@
+import logging
 import os
 
 __all__ = [
     'config', 'Config'
 ]
+
+logger = logging.getLogger(__name__)
 
 
 class Config:
@@ -43,13 +46,13 @@ class Config:
         )
 
     def print(self):
-        print(f"host={self.host}")
-        print(f"port={self.port}")
-        print(f"initial_user={self.initial_user}")
-        print(f"initial_pass={self.initial_password}")
-        print(f"user={self.user}")
-        print(f"database={self.database}")
-        print(f"pass={self.password}")
+        logger.info(f"host={self.host}")
+        logger.info(f"port={self.port}")
+        logger.info(f"initial_user={self.initial_user}")
+        logger.info(f"initial_pass={self.initial_password}")
+        logger.info(f"user={self.user}")
+        logger.info(f"database={self.database}")
+        logger.info(f"pass={self.password}")
 
     def __str__(self):
         return f"Config(host={self.host}, port={self.port})"

@@ -1,8 +1,13 @@
+import logging
+
 from psycopg2 import sql
 from psycopg2.errors import (
     DuplicateObject,
     DuplicateDatabase
 )
+
+
+logger = logging.getLogger(__name__)
 
 
 class SqlQuery:
@@ -22,7 +27,7 @@ class SqlQuery:
             try:
                 cursor.execute(query)
             except DuplicateObject:
-                print(f"User {self.config.user} already exists")
+                logger.error(f"User {self.config.user} already exists")
 
     def create_db(self):
         query = sql.SQL(
@@ -38,7 +43,7 @@ class SqlQuery:
                 cursor.execute(query)
                 self._grant_all_priv()
             except DuplicateDatabase:
-                print(f"Database {self.config.database} already exists")
+                logger.error(f"Database {self.config.database} already exists")
 
     def _grant_all_priv(self):
         query = sql.SQL(
