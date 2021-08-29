@@ -4,7 +4,13 @@ import psycopg2
 from .sql_query import SqlQuery
 
 
-def connect(host, port, database, user, password):
+def connect(
+    host,
+    user,
+    port=5432,
+    database=None,
+    password=None
+):
     try:
         conn = psycopg2.connect(
             database=database,
@@ -33,12 +39,15 @@ def db_is_ready(conf):
         try:
             conn = connect(
                 user=conf.initial_user,
-                password=conf.initial_password,
                 host=conf.host,
                 port=conf.port
             )
             conn.close()
-        except Exception:
+            print("DB is READY!")
+            break
+        except psycopg2.Error as e:
+            print("DB not ready yet")
+            print(e)
             time.sleep(1)
 
     return True

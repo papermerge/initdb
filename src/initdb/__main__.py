@@ -2,7 +2,7 @@ import sys
 
 from .config import config
 
-from .utils import (
+from . import (
     db_is_ready,
     create_user,
     create_db
