@@ -2,7 +2,7 @@
 
 CMD="$1"
 
-INIT="/app/venv/bin/python -m initdb"
+INIT="/venv/bin/python -m initdb"
 
 case $CMD in
     init)

@@ -69,6 +69,7 @@ def create_user(conf):
         config=conf
     )
     sql_query.create_user()
+    connection.close()
 
 
 def create_db(conf):
@@ -83,3 +84,4 @@ def create_db(conf):
         config=conf
     )
     sql_query.create_db()
+    connection.close()

@@ -16,13 +16,14 @@ ENV PATH="/venv/bin/:$PATH"
 COPY --from=build /venv /venv
 
 RUN apt-get update && apt-get install -y \
-    build-essential python3-dev gcc libpq5 \
+    build-essential python3-dev gcc libpq5 postgresql-client \
     && apt-get -y clean
 
-COPY src /src
 COPY docker/run.sh /run.sh
+COPY src /src
 RUN chmod +x /run.sh
 
 WORKDIR /src
+
 
 CMD ["/venv/bin/python", "-m", "initdb"]

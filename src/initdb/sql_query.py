@@ -22,10 +22,11 @@ class SqlQuery:
             user=sql.Identifier(self.config.user),
             password=sql.Identifier(self.config.password)
         )
-
         with self.connection.cursor() as cursor:
             try:
                 cursor.execute(query)
+                print("created")
+                self.connection.commit()
             except DuplicateObject:
                 logger.error(f"User {self.config.user} already exists")
 
@@ -42,6 +43,7 @@ class SqlQuery:
             try:
                 cursor.execute(query)
                 self._grant_all_priv()
+                self.connection.commit()
             except DuplicateDatabase:
                 logger.error(f"Database {self.config.database} already exists")
 

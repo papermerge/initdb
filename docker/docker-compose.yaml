@@ -13,5 +13,17 @@ services:
     command: /run.sh init
     env_file:
       - .env
+
+# Example of .env file
+#
+# INIT_IMAGE=initdb
+# INITIAL_DATABASE_USER=postgres
+# INITIAL_DATABASE_PASSWORD=...
+# DATABASE_HOST=postgres
+# DATABASE_USER=www3_user
+# DATABASE_NAME=www3_db
+# DATABASE_PASSWORD=...
+#
+
 volumes:
   postgres_data:
