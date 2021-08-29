@@ -20,6 +20,9 @@ RUN apt-get update && apt-get install -y \
     && apt-get -y clean
 
 COPY src /src
+COPY docker/run.sh /run.sh
+RUN chmod +x /run.sh
+
 WORKDIR /src
 
 CMD ["/venv/bin/python", "-m", "initdb"]
