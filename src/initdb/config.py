@@ -15,7 +15,7 @@ class Config:
 
     def __init__(self):
         self.host = os.environ.get(
-            "DATABASE_HOST",
+            "PAPERMERGE_DATABASE_HOST",
             "postgres"
         )
         # initial_user and initial_password are used to
@@ -29,19 +29,19 @@ class Config:
             None
         )
         self.user = os.environ.get(
-            "DATABASE_USER",
+            "PAPERMERGE_DATABASE_USER",
             None
         )
         self.database = os.environ.get(
-            "DATABASE_NAME",
+            "PAPERMERGE_DATABASE_NAME",
             None
         )
         self.password = os.environ.get(
-            "DATABASE_PASSWORD",
+            "PAPERMERGE_DATABASE_PASSWORD",
             None
         )
         self.port = os.environ.get(
-            "DATABASE_PORT",
+            "PAPERMERGE_DATABASE_PORT",
             5432
         )
 
