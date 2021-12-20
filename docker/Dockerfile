@@ -1,4 +1,4 @@
-FROM python:3.7-buster as build
+FROM python:3.8-buster as build
 
 RUN apt-get update \
     && apt-get install -y \
@@ -6,11 +6,11 @@ RUN apt-get update \
     && apt-get -y clean
 
 RUN python -m venv /venv
-RUN /venv/bin/pip install --no-cache-dir -U pip
-COPY requirements.txt /requirements.txt
-RUN /venv/bin/pip install --no-cache-dir -r /requirements.txt
+RUN /venv/bin/pip install --no-cache-dir -U pip poetry
+COPY poetry.lock pyproject.toml /
+RUN poetry install
 
-FROM python:3.7-slim
+FROM python:3.8-slim
 ENV PATH="/venv/bin/:$PATH"
 
 COPY --from=build /venv /venv
