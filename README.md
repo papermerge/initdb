@@ -1,3 +1,5 @@
+## This repository is obsolete. It was replaced with https://github.com/papermerge/papermerge-cloud/#createdb
+
 # InitDB
 
 Small package that creates a user and database owned by that user.
